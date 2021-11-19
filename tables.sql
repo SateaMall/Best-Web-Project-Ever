@@ -52,21 +52,21 @@ ALTER TABLE Produit
 
 ALTER TABLE Commandes
   ADD PRIMARY KEY ('idCommande'),
-  ADD KEY 'email' ('email');
+  ADD KEY email ('email');
 
 ALTER TABLE Lignescommandes
     ADD PRIMARY KEY ('idLigneCommande'),
-    ADD KEY 'idCommande' ('idCommande'),
-    ADD KEY 'idProduit' ('idProduit');
+    ADD KEY idCommande ('idCommande'),
+    ADD KEY idProduit ('idProduit');
 
 
 ALTER TABLE Commandes
-  ADD CONSTRAINT 'Commandes_Client' FOREIGN KEY ('email') REFERENCES 'Client' ('email');
+  ADD CONSTRAINT Commandes_Client FOREIGN KEY ('email') REFERENCES Client ('email');
 
 
 ALTER TABLE Lignescommandes
-  ADD CONSTRAINT 'Lignescommandes_Commandes' FOREIGN KEY ('idCommande') REFERENCES 'Commandes' ('idCommande'),
-  ADD CONSTRAINT 'Lignescommandes_Produit' FOREIGN KEY ('idProduit') REFERENCES 'Produit' ('idProduit');
+  ADD CONSTRAINT Lignescommandes_Commandes FOREIGN KEY ('idCommande') REFERENCES Commandes ('idCommande'),
+  ADD CONSTRAINT Lignescommandes_Produit FOREIGN KEY ('idProduit') REFERENCES Produit ('idProduit');
 
 COMMIT;
 
