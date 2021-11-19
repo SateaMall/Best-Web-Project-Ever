@@ -28,16 +28,15 @@ CREATE TABLE IF NOT EXISTS 'Produit' (
 CREATE TABLE IF NOT EXISTS 'Commandes' (
     'idCommande' int(10) UNSIGNED DEFAULT '0',
     'date' date NOT NULL DEFAULT '0000-00-00',
-    'etat' varchar(20) NOT NULL DEFAULT '',
-    email (etranger)
+    'etat' varchar(20) NOT NULL DEFAULT ''
+   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* creation table LignesCommandes*/
 
 CREATE TABLE IF NOT EXISTS 'Lignescommandes' (
     'idLigneCommande' int(10) UNSIGNED DEFAULT '0',
-    idCommande (etranger)
-    idProduit (etranger)
+   
     'quantite' int(5) UNSIGNED DEFAULT '0',
     'montant' int(5) UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
