@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Produit (
     categorie varchar(20) NOT NULL DEFAULT '', 
     descriptif varchar(500) NOT NULL DEFAULT '',
     photo TEXT (100) NOT NULL DEFAULT '',
-    prix smallmoney (6)  UNSIGNED DEFAULT '0',
+    prix INT (6)  UNSIGNED DEFAULT '0',
     stock varchar(20) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
