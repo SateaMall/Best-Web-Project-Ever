@@ -1,1 +1,1 @@
-Depose the web site code here
+Depose the web site code files in this folder
