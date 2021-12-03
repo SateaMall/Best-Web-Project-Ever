@@ -7,7 +7,7 @@
 --
 
 CREATE TABLE `client` (
-  `email` varchar(20) NOT NULL DEFAULT '',
+  `email` varchar(100) NOT NULL DEFAULT '',
   `motDePasse` varchar(20) NOT NULL DEFAULT '',
   `nom` varchar(20) NOT NULL DEFAULT '',
   `prenom` varchar(20) NOT NULL DEFAULT '',
