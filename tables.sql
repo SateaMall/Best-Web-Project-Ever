@@ -12,7 +12,7 @@ CREATE TABLE `client` (
   `nom` varchar(20) NOT NULL DEFAULT '',
   `prenom` varchar(20) NOT NULL DEFAULT '',
   `ville` varchar(20) NOT NULL DEFAULT '',
-  `addresse` varchar(20) NOT NULL DEFAULT '',
+  `addresse` varchar(200) NOT NULL DEFAULT '',
   `numTelephone` int(15) UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
