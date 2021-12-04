@@ -4,16 +4,17 @@
     height:auto;
     
 }
-.mybar{
-    position:fix;
-    top:0;
+.list-unstyled{
+margin-top: 8em;
 }
 .search{
     margin-right: 9em;
 }
 .navbar, .navbar-expand-lg, .navbar, .navbar-dark, .bg-dark{
     background-color: rgb(0, 0, 0);
+
 }
+
 .brand{
     font-family: 'stalemate', cursive;
     font-size: 42px;
@@ -49,6 +50,30 @@
     cursor: pointer;
     color: black;
 }
+.buttonCom {
+    width: auto;
+    height: 38px;
+    float: right;
+    padding: 5px 20px 3px ;
+    border: 2px solid white;
+    background-color: rgb(43, 146, 3);
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: "OakesGroteskBold";
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    letter-spacing: 2px;
+    margin:3em;
+
+}
+.buttonCom:hover{
+
+background-color: rgb(115, 253, 127);
+cursor: pointer;
+color: black;
+}
+
 .buttons2{
     margin: 1em;
 }
@@ -85,34 +110,80 @@ bottom: 0;
     padding-left: 0.2em;
     font-weight: bold;
 }
-.image1{
-    position: absolute ;
-    right:0em;
-    height:34em;
-    width: 52.63em;
-    object-position:center;
-    object-fit:cover;
- }
- .image2{
+.avis{
 
-    left:0;
-    height:34em;
-    width: 52.63em;
-    object-fit:cover;
- }
- .Plates{
-    font-family:"OakesGroteskRegular" ;
-    font-size: 4em;
+color: white;
+padding :3em;
+margin:9em;
+border-radius: 10px;
+
+           }
+.ul-avis{
+    display: flex;
+    list-style-type: none;
+        
+}
+.container {
+    margin:3em;
+  
+}
+.li-avis {
+    margin: 0 1em;
+            background-color: #222222;
+            text-align: center;
+            padding: 2em 1em;
+            width: 80%;
+       
+            border-radius: 1em;
+}
+
+
+.img-portrait{
+     width: 5em;
+     height: 5em;
+     border: 5px solid #222222;
+     border-radius: 50%;
+     margin-top: -5em;
+
+   } 
+
+
+
+
+.myimg{
+    border-radius: 23px;
+height: 20em;
+width: 30em;
+object-fit:cover;
+}
+.origine{
+    font-size:35px;
     font-weight: bold;
-    padding-left:3em;
-    padding-top:2em;
 }
-.Section1{
-    padding-bottom: 20em;
+.section {
+    border-radius: 10px;
+    padding: 25px;
+    background-color: #EEEEEE;
+    margin:25px;
+    margin-top:50px;
 }
-.rights {
-    position: absolute ;
-    right:0em;
-    margin-top: -13em;
-    margin-right: 3em;
+
+.name{
+    padding: 30px;
+    font-weight: bold;
+}
+.availebel {
+    color: green;
+}
+
+.unavailebel{
+    color: red;
+}
+.media-body{
+    font-size: 23px;  
+    padding-left: 30px;
+}
+.titles{
+    font-weight: bold;
+     padding-top: 7em;
 }
