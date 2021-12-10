@@ -1,21 +1,24 @@
 <?php 
 $user="e20200010272";$pass="xxxx";
-try{
+
+
+try {
 $bdd = new PDO('mysql:host=mysql.etu.umontpellier.fr;
 dbname=e20200010272; charset=UTF8', $user, $pass,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,));
 
-} catch(PDOException $e){
-echo $e->getMessage();
-die("Connexion impossible !");
-
-}
-
 $allproducts = $bdd->query ('SELECT * FROM produit') ; 
 if (isset ($_GET ['s']) AND !empty ($_GET['s']){
 	$recherche =  htmlspecialchars($_GET['s']);
-	$allproducts = $bdd->query ('SELECT * FROM produit WHERE idProduit LIKE "%'.$recherche.'%" '
-) ; 
+	$allproducts = $bdd->query ('SELECT * FROM produit WHERE idProduit LIKE "%'.$recherche.'%" ') ; 
+} 
+
+catch(PDOException $e) {
+echo $e->getMessage();
+die("Connexion impossible !");
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
