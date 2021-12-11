@@ -1,25 +1,4 @@
-<?php 
-$user="e20200010272";$pass="xxxx";
 
-
-try {
-$bdd = new PDO('mysql:host=mysql.etu.umontpellier.fr;
-dbname=e20200010272; charset=UTF8', $user, $pass,
-array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,));
-
-$allproducts = $bdd->query ('SELECT * FROM produit') ; 
-if (isset ($_GET ['s']) AND !empty ($_GET['s']){
-	$recherche =  htmlspecialchars($_GET['s']);
-	$allproducts = $bdd->query ('SELECT * FROM produit WHERE idProduit LIKE "%'.$recherche.'%" ') ; 
-} 
-
-catch(PDOException $e) {
-echo $e->getMessage();
-die("Connexion impossible !");
-}
-
-
-?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,16 +8,36 @@ die("Connexion impossible !");
 <body>
 <form method= "GET">
 	<input type="search" name="s" placeholder="Rechercher un produit" autocomplete="off">
-	<input type=submit" name="envoyer">
+	<input type="submit" name="envoyer">
 </form>
 
 <section class= "afficher_produit">
 
 <?php 
+
+$user="e20200010272";$pass="xxxxx";
+
+
+
+$bdd = new PDO('mysql:host=mysql.etu.umontpellier.fr;
+dbname=e20200010272; charset=UTF8', $user, $pass,
+array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,));
+
+
+
+
+$allproducts = $bdd->query ('SELECT * FROM produit') ; 
+if (isset ($_GET ['s']) AND !empty ($_GET['s'])){
+	$recherche =  htmlspecialchars($_GET['s']);
+	$allproducts = $bdd->query ('SELECT * FROM produit WHERE nomProduit LIKE "%'.$recherche.'%" ') ; 
+} 
+
+
+
 	if ($allproducts->rowCount() > 0){
 		while($product = $allproducts->fetch()){
 			?>
-			<p> <?= $product['idProduit']; ?></p>
+			<p> <?= $product['nomProduit']; ?></p>
 			<?php
 }
 	} else {
@@ -46,9 +45,11 @@ die("Connexion impossible !");
 	<p> Aucun produit trouvé</p>
 	<?php 
 	}
+
 ?>
+
+
 </section>
 				  
   </body>
 </html>
-
