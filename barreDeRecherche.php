@@ -15,7 +15,9 @@
 
 <?php 
 
-$user="e20200010272";$pass="xxxxx";
+try{
+
+$user="e20200010272";$pass="xxxxxxx";
 
 
 
@@ -26,10 +28,14 @@ array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,));
 
 
 
+
+
 $allproducts = $bdd->query ('SELECT * FROM produit') ; 
+
 if (isset ($_GET ['s']) AND !empty ($_GET['s'])){
 	$recherche =  htmlspecialchars($_GET['s']);
-	$allproducts = $bdd->query ('SELECT * FROM produit WHERE nomProduit LIKE "%'.$recherche.'%" ') ; 
+	$allproducts = $bdd->query ('SELECT * FROM produit WHERE nomProduit LIKE "%'.$recherche.'%"  OR marque LIKE "%'.$recherche.'%" OR categorie LIKE "%'.$recherche.'%" OR  prix LIKE "%'.$recherche.'%" ' ) ; 
+	
 } 
 
 
@@ -45,7 +51,13 @@ if (isset ($_GET ['s']) AND !empty ($_GET['s'])){
 	<p> Aucun produit trouvé</p>
 	<?php 
 	}
-
+}
+	
+	catch (PDOException $e) 
+	{
+    echo "Erreur!: " . $e->getMessage() . "<br/>";
+    die();
+  	}
 ?>
 
 
