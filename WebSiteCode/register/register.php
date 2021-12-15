@@ -18,35 +18,15 @@
 	$phone=$_POST['phone'];
 	$phone=(int)$phone;
 	
-	/*echo $mail;
-	echo $mdp;
-	echo $surname;
-	echo $name;
-	echo $adress;
-	echo $city;
-	echo $phone;*/
-	
-	if (empty($mail)) {
-    	echo "Erreur 01";
+	/*On verrifie que tous les paramètres sont les bons*/
+	if (empty($mail)|| empty($mdp) || empty($surname)|| empty($name)|| empty($adress) || empty($city) || empty($phone)) {
+	echo '<img src="../register/error_gif.gif" alt=""/>';
+	echo '<style> body {
+	background-color: #141117;
+	}</style>';
+	echo ( '<meta http-equiv="refresh" content="2;url=http://alexis.temperamentcordier.org/Projet-univ/register/">');
+    exit(1);
   }
-	if(empty($mdp)){
-		echo "Erreur 02";
-	}
-	if(empty($surname)){
-		echo "Erreur 03";
-	}
-	if(empty($name)){
-		echo "Erreur 04";
-	}
-	if(empty($adress)){
-		echo "Erreur 05";
-	}
-	if(empty($city)){
-		echo "Erreur 06";
-	}
-	if(empty($phone)){
-		echo "Erreur 07";
-	}
 	
 	/*On accède à la base de données.*/
   $host_name = 'db5005426273.hosting-data.io';

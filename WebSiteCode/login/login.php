@@ -1,5 +1,6 @@
 <?php
 session_start();
+setcookie('PHPSSEID', 'session_start()', time()+(60*60*24*30), "/; SameSite=None; Secure");
 ?>
 
 <!doctype html>
@@ -9,17 +10,20 @@ session_start();
 <title>MC-Login</title>
 </head>
 	
+	<body class="background">
 <?php 
 	$email = $_POST['mail'];
 	$motdp = $_POST['mdp'];
 	
 	
-	if (empty($email)) {
-    echo "Erreur pas de mail.";
+	if (empty($email)|| empty($motdp)) {
+	echo '<img src="../login/error_gif.gif" alt=""/>';
+	echo '<style> body {
+	background-color: #141117;
+	}</style>';
+	echo ( '<meta http-equiv="refresh" content="2;url=http://alexis.temperamentcordier.org/Projet-univ/login/">');
+    exit(1);
   }
-	if(empty($motdp)){
-		echo "Vous n'avez pas rentré de mot de passe.";
-	}
 	
 	/*On accède à la base de données.*/
   $host_name = 'db5005426273.hosting-data.io';
@@ -36,6 +40,7 @@ session_start();
 			  $_SESSION['setmail']=$email;
 			  //initialiser la session avec la base de données:
 			 	 $_SESSION['nom']= $row['nom'];
+			  $_SESSION['prenom']= $row['prenom'];
 			 echo ( '<meta http-equiv="refresh" content="0.4;url=http://alexis.temperamentcordier.org/Projet-univ/">');
 		  }
 		  
@@ -51,10 +56,8 @@ session_start();
     die();
   	}
 	
-	
 	?>
-<body>
-	<p style="display: inline; float:left;"><img src="../login/loading-4.gif" width="10%" height="10%" alt=""/>
+	<p style="display: inline; float:left;">
 	Veuillez patienter...</p>
 </body>
 </html>
