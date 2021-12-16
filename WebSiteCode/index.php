@@ -1,23 +1,49 @@
 <?php 
 session_start(); 
 ?>
+
+<?php 
+  //PDO: 
+  try 
+  {
+  $host_name = 'db5005426273.hosting-data.io';
+  $database = 'dbs4556445';
+  $user_name = 'dbu2795511';
+  $password = 'bdUnivFac37';
+$bdh = new PDO("mysql:host=$host_name; dbname=$database;", $user_name, $password);
+//Les Données:
+$stmp=$bdh->query("SELECT * FROM produit");
+$resultats=$stmp->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title> Nom de Page </title>
+  <link rel="stylesheet" href="Accueil.css">
+	
+	<!-- Ajout de favicon -->
+	<link rel="icon" href="LetterM.ico" />
+	
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stalemate&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title> Mélange Culturel </title>
 </head>
 <body>
-  <?php  include('Up.html');  ?>
+
+
+  <?php  include('Up.php');  ?>
 
   <forme class="menu">
 
   <ul class="list-unstyled">
-
-
 
 
 <!-- French-->
@@ -25,28 +51,64 @@ session_start();
   <section class="francais section" id="french">
    
   <div class="plat">
-     <div class="origine" >Des entrées Françaises: </div>
-     <li class="media">
-       <img class="mr-3" src="..." alt="Generic placeholder image">
+     <div class="origine" >Des plats Français: </div>
+     <?php 
+foreach($resultats as $resultat):
+
+    $id= $resultat["0"];
+    $nom=$resultat["1"];
+    $marque=$resultat["2"];
+    $categorie=$resultat["3"];
+    $description=$resultat["4"];
+    $photo=$resultat["5"];
+    $prix=$resultat["6"];
+    $stock=$resultat["7"];
+
+      if (strcmp($marque, "AllFrench")==0):
+
+        if (htmlspecialchars($stock)>=1){ 
+      $disponibilite= "Disponible ($stock)";}
+      else {
+        $disponibilite="Undisponible";
+      }
+
+
+?>
+
+     
+   <li class="media my-4 padding" id=" <?php echo htmlspecialchars($id) ?>">
+       <img class="myimg row align-self-center" src=" <?php echo htmlspecialchars($photo) ?>" alt=" <?php echo htmlspecialchars($nom) ?>">
        <div class="media-body">
-         <h3 class="mt-0 mb-1 name">French plate</h3>
+         <h3 class="mt-0 mb-1 name"> <?php echo htmlspecialchars($nom)  ?></h3>
            <div class="discription" >
-             Ajaa is made out of blab bllalal lsldasld lqsld lqsdl qlsdl l ls dllsqdnusqdf sdufusdofkdsmflsmdofok  msodf ksdfo.""
+           <span class=" titles"> Desciption : </span> <?php echo htmlspecialchars($description) ?>
            </div>
 
+           <div class="categorie">
+            <span class=" titles"> Categorie : </span>  <?php  echo htmlspecialchars($categorie)  ?>
+           </div> 
+
            <div class="price">
-           <span class=" titles"> Prix </span> : 19$
+            <span class=" titles"> Prix : </span>  <?php  echo htmlspecialchars($prix)  ?>&euro;
            </div> 
 
            <div class="stock">
-           <span class=" titles"> Stock </span> : <!-- <div if ($stock>=1) { class="availebel"> availbel </div> }   else { class="unavailebel"> unavailbel </div> -->
+           <span class=" titles"> Stock : </span>   <span class="<?php echo htmlspecialchars($disponibilite) ?>"> <?php echo htmlspecialchars($disponibilite)?> </span>
            </div> 
 
-
-       </div>
+           <?php if (htmlspecialchars($stock)>=1): ?>
+            <input type="number" name="<?php echo htmlspecialchars($id) ?>" min="0" max="<?php echo htmlspecialchars($stock) ?>" step="1" class="form-control quantity"
+          placeholder="Quantité">
+        <?php endif ?>
+        
+        </div>
+          
      </li>
-  </div> 
+    <?php  endif; 
+       endforeach;  ?>
 
+  </div> 
+  <button class="buttonCom" type="submit"> Commande !</button>
   </section>
 
 
@@ -55,79 +117,70 @@ session_start();
 <!-- Syrian-->
 
 <section class="Syrian section" id="syrian">
-
 <div class="plat"> 
-   <div class="origine" >Des plats Syriens: </div>
-     
-   <li class="media my-4">
-       <img class=" myimg" src="img/syfood.jpg" alt="Generic placeholder image">
+<div class="origine" >Des plats Syriens: </div>
+
+
+<?php 
+foreach($resultats as $resultat):
+ 
+    $id=$resultat["0"];
+    $nom=$resultat["1"];
+    $marque=$resultat["2"];
+    $categorie=$resultat["3"];
+    $description=$resultat["4"];
+    $photo=$resultat["5"];
+    $prix=$resultat["6"];
+    $stock=$resultat["7"];
+ 
+    if (strcmp($marque, "AllSyrian")==0):
+      
+    if (htmlspecialchars($stock)>=1){
+      $disponibilite= "Disponible ($stock)";}
+      else {
+        $disponibilite="Undisponible";
+      }
+
+
+?>
+
+<li class="media my-4 padding" id=" <?php echo htmlspecialchars($id) ?>">
+       <img class="myimg row align-self-center" src=" <?php echo htmlspecialchars($photo) ?>" alt=" <?php echo htmlspecialchars($nom) ?>">
        <div class="media-body">
-         <h3 class="mt-0 mb-1 name">Syrian plate</h3>
+         <h3 class="mt-0 mb-1 name"> <?php echo htmlspecialchars($nom)  ?></h3>
            <div class="discription" >
-           <span class=" titles"> Desciption : </span>Ajaa is made out of blab bllalal lsldasld lqsld lqsdl qlsdl l ls dllsqdnusqdf sdufusdofkdsmflsmdofok  msodf ksdfo.
+           <span class=" titles"> Desciption : </span> <?php echo htmlspecialchars($description) ?>
            </div>
            
+           <div class="categorie">
+            <span class=" titles"> Categorie : </span>  <?php  echo htmlspecialchars($categorie)  ?>
+           </div> 
+
            <div class="price">
-            <span class=" titles"> Prix : </span> 19$
+            <span class=" titles"> Prix : </span>  <?php  echo htmlspecialchars($prix)  ?>&euro;
            </div> 
 
            <div class="stock">
-           <span class=" titles"> Stock : </span>  <!-- <div if ($stock>=1) { class="availebel"> availbel </div> }   else { class="unavailebel"> unavailbel </div> -->
+           <span class=" titles"> Stock : </span>   <span class="<?php echo htmlspecialchars($disponibilite) ?>"> <?php echo htmlspecialchars($disponibilite)?> </span>
            </div> 
-           <input type="number" name="platSy1" min="0" step="1" class="form-control quantity"
+<?php if (htmlspecialchars($stock)>=1): ?>
+           <input type="number" name="<?php echo htmlspecialchars($id) ?>" min="0" max="<?php echo htmlspecialchars($stock) ?>" step="1" class="form-control quantity"
           placeholder="Quantité">
-        
-        </div>
-          
-     </li>
-
-   <li class="media my-4">
-       <img class=" myimg" src="img/syfood.jpg" alt="Generic placeholder image">
-       <div class="media-body">
-         <h3 class="mt-0 mb-1 name">Syrian plate</h3>
-           <div class="discription" >
-           <span class=" titles"> Desciption : </span>Ajaa is made out of blab bllalal lsldasld lqsld lqsdl qlsdl l ls dllsqdnusqdf sdufusdofkdsmflsmdofok  msodf ksdfo.
-           </div>
-           
-           <div class="price">
-            <span class=" titles"> Prix : </span> 19$
-           </div> 
-
-           <div class="stock">
-           <span class=" titles"> Stock : </span>  <!-- <div if ($stock>=1) { class="availebel"> availbel </div> }   else { class="unavailebel"> unavailbel </div> -->
-           </div> 
-           <input type="number" name="platSy1" min="0" step="1" class="form-control quantity"
-          placeholder="Quantité">
-       
+        <?php endif ?>
         </div>
           
      </li>
    
-   <li class="media my-4">
-       <img class=" myimg" src="img/syfood.jpg" alt="Generic placeholder image">
-       <div class="media-body">
-         <h3 class="mt-0 mb-1 name">Syrian plate</h3>
-           <div class="discription" >
-           <span class=" titles"> Desciption : </span>Ajaa is made out of blab bllalal lsldasld lqsld lqsdl qlsdl l ls dllsqdnusqdf sdufusdofkdsmflsmdofok  msodf ksdfo.
-           </div>
-           
-           <div class="price">
-            <span class=" titles"> Prix : </span> 19$
-           </div> 
+    <?php  endif; 
+       endforeach;  ?>
 
-           <div class="stock">
-           <span class=" titles"> Stock : </span>  <!-- <div if ($stock>=1) { class="availebel"> availbel </div> }   else { class="unavailebel"> unavailbel </div> -->
-           </div> 
-           <input type="number" name="platSy1" min="0" step="1" class="form-control quantity"
-          placeholder="Quantité">
-          <button class="buttonCom" type="submit"> Commande !</button>
-        </div>
-          
-     </li>
+
+
+
+     
    </div> 
-
+   <button class="buttonCom" type="submit"> Commande !</button>
 </section>
-
 
 
 
@@ -136,25 +189,72 @@ session_start();
   <section class="tunisian section" id="tunisian">
 
   <div class="plat">  
-     <div class="origine" >  Des desserts Tunisians:  </div>
-      <li class="media">
-        <img class="mr-3" src="..." alt="Generic placeholder image">
-        <div class="media-body">
-          <h3 class="mt-0 mb-1 name">Tunisian desserts</h3>
-             <div class="discription" >
-               Ajaa is made out of blab bllalal lsldasld lqsld lqsdl qlsdl l ls dllsqdnusqdf sdufusdofkdsmflsmdofok  msodf ksdfo.
-             </div>
-             
+
+     <div class="origine" >  Des plats Tunisians:  </div>
+
+     <?php 
+foreach($resultats as $resultat):
+ 
+    $id=$resultat["0"];
+    $nom=$resultat["1"];
+    $marque=$resultat["2"];
+    $categorie=$resultat["3"];
+    $description=$resultat["4"];
+    $photo=$resultat["5"];
+    $prix=$resultat["6"];
+    $stock=$resultat["7"];
+
+    if (strcmp($marque, "AllTunisian")==0):
+
+      if (htmlspecialchars($stock)>=1){
+      $disponibilite= "Disponible ($stock)";}
+      else {
+        $disponibilite="Undisponible";
+      }
+
+?>
+
+
+
+<li class="media my-4 padding" id=" <?php echo htmlspecialchars($id) ?>">
+       <img class="myimg row align-self-center" src=" <?php echo htmlspecialchars($photo) ?>" alt=" <?php echo htmlspecialchars($nom) ?>">
+       <div class="media-body">
+         <h3 class="mt-0 mb-1 name"> <?php echo htmlspecialchars($nom)  ?></h3>
+           <div class="discription" >
+           <span class=" titles"> Desciption : </span> <?php echo htmlspecialchars($description) ?>
+           </div>
+           
+           <div class="categorie">
+            <span class=" titles"> Categorie : </span>  <?php  echo htmlspecialchars($categorie)  ?>
+           </div> 
+           
            <div class="price">
-           <span class=" titles"> Prix </span> : 19$
+            <span class=" titles"> Prix : </span>  <?php  echo htmlspecialchars($prix)  ?>&euro;
            </div> 
 
            <div class="stock">
-           <span class=" titles"> Stock </span>: <!-- <div if ($stock>=1) { class="availebel"> availbel </div> }   else { class="unavailebel"> unavailbel </div> -->
+           <span class=" titles"> Stock : </span>   <span class="<?php echo htmlspecialchars($disponibilite) ?>"> <?php echo htmlspecialchars($disponibilite) ?> </span>
            </div> 
 
+           <?php if (htmlspecialchars($stock)>=1): ?>
+            <input type="number" name="<?php echo htmlspecialchars($id) ?>" min="0" max="<?php echo htmlspecialchars($stock) ?>" step="1" class="form-control quantity"
+          placeholder="Quantité">
+        <?php endif ?>
+        
         </div>
-       </li>
+          
+     </li>
+    <?php  endif; 
+       endforeach;  ?>
+<?php  } 
+catch (PDOException $e) 
+{
+  echo "Erreur!: " . $e->getMessage() . "<br/>";
+  die();
+  }
+
+
+?>
   </div> 
 
   </section>
@@ -163,6 +263,7 @@ session_start();
 
 </ul>
 
+<button class="buttonCom" type="submit"> Commande !</button>
 
   </forme>
 
@@ -176,21 +277,23 @@ session_start();
           </li>
 
           <li class="li-avis">
-            <img class="img-portrait" src="img/maryam.jpg" alt="Portrait">
+            <img class="img-portrait" src="img/maryam.jpeg" alt="Portrait">
             <blockquote>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, dignissimos quibusdam! Vitae cumque quidem commodi! Ratione fugit soluta aliquam assumenda, corrupti reprehenderit quaerat cum reiciendis. Optio illum consequatur quasi eius. "</blockquote> 
             <cite> - Maryam
           </li>
 
           <li class="li-avis ">
-            <img class="img-portrait" src="img/alexis.gif" alt="Portrait">
+            <img class="img-portrait" src="img/alexis.jpg" alt="Portrait">
             <blockquote>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, dignissimos quibusdam! Vitae cumque quidem commodi! Ratione fugit soluta aliquam assumenda, corrupti reprehenderit quaerat cum reiciendis. Optio illum consequatur quasi eius. "</blockquote> 
             <cite> - Alexis
           </li>
        </ul>
    </div>
-  
+   
 </section>
-
-<?php  include('Down.html');  ?>
+  
+<?php  
+include('Down.html'); 
+?>
 </body>
 </html>
