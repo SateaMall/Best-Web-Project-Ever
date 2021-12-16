@@ -40,8 +40,8 @@ $resultats=$stmp->fetchAll();
 
 
   <?php  include('Up.php');  ?>
-
-  <forme class="menu">
+<!-- On génère le formulaire avec la base de donnée -->
+  <form class="menu" method="POST">
 
   <ul class="list-unstyled">
 
@@ -108,7 +108,7 @@ foreach($resultats as $resultat):
        endforeach;  ?>
 
   </div> 
-  <button class="buttonCom" type="submit"> Commande !</button>
+  <input class="btn-success" type="submit" name="Commander"></input>
   </section>
 
 
@@ -179,7 +179,7 @@ foreach($resultats as $resultat):
 
      
    </div> 
-   <button class="buttonCom" type="submit"> Commande !</button>
+   <input class="btn-success" type="submit" name="Commander"></input>
 </section>
 
 
@@ -246,6 +246,7 @@ foreach($resultats as $resultat):
      </li>
     <?php  endif; 
        endforeach;  ?>
+	  <input class="btn-success" type="submit" name="Commander"></input>
 <?php  } 
 catch (PDOException $e) 
 {
@@ -263,10 +264,70 @@ catch (PDOException $e)
 
 </ul>
 
-<button class="buttonCom" type="submit"> Commande !</button>
+  </form>
 
-  </forme>
+	<!-- On va regader quels inputs ont été rentrés lors du clique : -->
+	
+<?php 
+  $host_name = 'db5005426273.hosting-data.io';
+  $database = 'dbs4556445';
+  $user_name = 'dbu2795511';
+  $password = 'bdUnivFac37';
 
+echo $_POST['2'];
+
+  try 
+  {
+    $dbh = new PDO("mysql:host=$host_name; dbname=$database;", $user_name, $password);
+	  
+	  
+	  $count=0;
+	  /*Ici on récupère les id des produits dont les inputs on été rentrés: */
+	  foreach($dbh->query('SELECT * from produit') as $row) {
+		  
+		  $comp=$row['idProduit'];
+
+		  if(isset($_POST["$comp"]) && !empty($_POST["$comp"]) && isset($_SESSION['setmail']) && !empty($_SESSION['setmail'])){
+			  
+			  
+			  /*On ajoute à la db "commandes" :*/
+			  if($count==0){
+				  $sql1="INSERT INTO commandes (idCommande, date, etat, email) VALUES (NULL, CURRENT_DATE(), 'En cours', '".$_SESSION['setmail']."')";
+			  	  $query1=$dbh->prepare($sql1);
+			      $query1->execute();
+				  $count=$count+1;
+			  }
+			  
+			  
+			  /*On parcours le tableau "produit" pour trouver le "prix" et l'"idCommande" :*/
+			  foreach($dbh->query("SELECT * FROM produit WHERE idProduit=$comp") as $prix){
+			  }
+			  foreach ($dbh->query("SELECT max(idCommande) as idComm FROM commandes") as $idCom){  
+			  }
+			 
+			  /*On rentre les variable reçus dans les foreach :*/
+			  $sql2="INSERT INTO lignescommandes (idLigneCommande, idCommande, idProduit, quantite, montant) VALUES (NULL , ".$idCom['idComm'].", $comp, ".$_POST["$comp"].", ". $prix['prix']*$_POST["$comp"] ." )";
+			  
+			  
+			  $query2=$dbh->prepare($sql2);
+			  $query2->execute();
+		  }
+		  
+		  else{}
+		  
+	  }
+	  
+	  
+  }
+	catch (PDOException $e) 
+	{
+    echo "Erreur!: " . $e->getMessage() . "<br/>";
+    die();
+  	}
+	
+	?>
+	
+<!-- On affiche les avis -->
 <section class ="avis" id="avis">
    <div class="container">
        <ul class ="ul-avis">

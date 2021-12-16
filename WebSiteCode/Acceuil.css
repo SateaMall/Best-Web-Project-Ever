@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Balqis Script';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Balqis Script'), url('Balqis.woff') format('woff');
+    }
 
 .panier-symb1{
     width: 20px;
@@ -172,18 +178,56 @@ object-fit:cover;
     padding: 30px;
     font-weight: bold;
 }
-.availebel {
+.Disponible {
     color: green;
 }
 
-.unavailebel{
+.Undisponible{
     color: red;
 }
 .media-body{
     font-size: 23px;  
     padding-left: 30px;
 }
+.media{
+    padding-bottom: 30px;
+}
 .titles{
     font-weight: bold;
      padding-top: 7em;
 }
+.signUp{
+    background-color: #EEEEEE;
+    margin:3%;
+    padding:200px;
+    text-align: center;
+}
+.buttonSign{width: auto;
+    height: 38px;
+    float: center;
+    padding: 5px 20px 3px ;
+    border: 2px solid white;
+    background-color: rgb(43, 146, 3);
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: "OakesGroteskBold";
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    letter-spacing: 2px;
+    margin:3em;
+
+}
+.buttonSign:hover{
+
+background-color: rgb(115, 253, 127);
+cursor: pointer;
+color: black;
+}
+
+.text-white {
+ margin-bottom: 0px;
+ padding-left: 0px;
+ padding-top: 4px;
+}
+
