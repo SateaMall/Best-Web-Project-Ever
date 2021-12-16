@@ -23,7 +23,7 @@ CREATE TABLE `client` (
 --
 
 CREATE TABLE `commandes` (
-  `idCommande` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `idCommande` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT , PRIMARY KEY (`idCommande`),
   `date` date NOT NULL DEFAULT '0000-00-00',
   `etat` varchar(30) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT ''
@@ -100,7 +100,6 @@ ALTER TABLE `client`
 -- Index pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  ADD PRIMARY KEY (`idCommande`),
   ADD KEY `Commandes_Client` (`email`);
 
 --
