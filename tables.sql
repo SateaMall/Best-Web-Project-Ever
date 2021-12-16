@@ -25,8 +25,8 @@ CREATE TABLE `client` (
 CREATE TABLE `commandes` (
   `idCommande` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `date` date NOT NULL DEFAULT '0000-00-00',
-  `etat` varchar(20) NOT NULL DEFAULT '',
-  `email` varchar(20) NOT NULL DEFAULT ''
+  `etat` varchar(30) NOT NULL DEFAULT '',
+  `email` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -36,7 +36,7 @@ CREATE TABLE `commandes` (
 --
 
 CREATE TABLE `lignescommandes` (
-  `idLigneCommande` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `idLigneCommande` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT , PRIMARY KEY (`idLigneCommande`),
   `idCommande` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `idProduit` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `quantite` int(5) UNSIGNED DEFAULT '0',
@@ -57,7 +57,7 @@ CREATE TABLE `produit` (
   `descriptif` varchar(500) NOT NULL DEFAULT '',
   `photo` text NOT NULL,
   `prix` int(6) UNSIGNED DEFAULT '0',
-  `stock` int(3) NOT NULL DEFAULT ''
+  `stock` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -107,7 +107,6 @@ ALTER TABLE `commandes`
 -- Index pour la table `lignescommandes`
 --
 ALTER TABLE `lignescommandes`
-  ADD PRIMARY KEY (`idLigneCommande`),
   ADD KEY `idCommande` (`idCommande`),
   ADD KEY `idProduit` (`idProduit`);
 
