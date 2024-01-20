@@ -1,4 +1,3 @@
-# Best-Web-Project-Ever
-One sentence : Get this project DONE !
+# Mélange Culturel: Restaurant spécialisé dans 4 cuisines
 
 Accessible at : http://alexis.temperamentcordier.org/Projet-univ/
